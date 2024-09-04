@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route.js"
 import productRoutes from "./routes/product.route.js"
 import cartRoutes from "./routes/cart.route.js"
 import couponRoutes from "./routes/coupon.route.js"
+import paymentRoutes from "./routes/payment.route.js"
 
 import { connectDB } from "./lib/db.js";
 dotenv.config();
@@ -21,6 +22,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products',productRoutes);
 app.use('/api/v1/carts',cartRoutes);
 app.use('/api/v1/coupons',couponRoutes);
+app.use('/api/v1/payments',paymentRoutes);
 
 
 app.listen(PORT,() => {
