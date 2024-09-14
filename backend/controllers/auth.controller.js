@@ -70,12 +70,11 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user && (await user.comparePassword(password))) {
       const { accessToken, refreshToken } = generateToken(user._id);
-
       await storeRefreshToken(user._id, refreshToken);
       setCookies(res, accessToken, refreshToken);
       res.status(201).json({
@@ -85,7 +84,7 @@ export const login = async (req, res) => {
         role: user.role,
       });
     } else {
-      res.status(400).json({ message: "Username or password doesnot match" });
+      res.status(400).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     console.log("Error in login controller", error.message);
